@@ -1,0 +1,13 @@
+#We ask super user permission
+sudo: required,
+services:
+  - docker
+
+before_install:
+  # We build the Dockerfile.dev and we use the tag docker-react-test
+  - docker build -t docker-react-test -f Dockerfile.dev .
+
+script: 
+  # It is supposed to contain all the commands that will be exceted to run our test suite
+  # -e CI=true to run the test and exit it as soon as the suite of tests is done
+  - docker run -e CI=true docker-react-test npm run test 
