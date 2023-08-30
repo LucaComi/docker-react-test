@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web:
+    # we need to pick the file Dockerfile.dev
+    build: 
+      #we pick the current directory
+      context: .
+      #pick  the Dockerfile.dev in the current context to make the build
+      dockerfile: Dockerfile.dev
+    # we map the ports
+    ports:
+      - "3000:3000"
+    volumes:
+      # we don't map the modules in the container with the one in my working directory
+      - /app/node_modules
+      # The . is the current working direcotry (pwd)
+      - .:/app
+      
+  # This is the second service responsible for the test suite
+  tests: 
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    # configure the running commands that will be triggered when the service run
+    command: ["npm", "run", "test"]
+    
