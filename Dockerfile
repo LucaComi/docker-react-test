@@ -10,6 +10,10 @@ RUN npm run build
 # ------------------ STEP 2 ---------------------------
 # The second phase can start with simply a new FROM command
 FROM nginx 
+
+# This does nothing by itself, but AWS will use to listeing on the port 80
+EXPOSE 80
+
 # I want to copy everything from a different phase this is why i use --from
 COPY --from=builder /app/build /usr/share/nginx/html
 
