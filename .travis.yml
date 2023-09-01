@@ -22,7 +22,7 @@ deploy:
   bucket_path: docker-react-test # teh same of the app name
   on: 
     # We deploy the app ony if we are on the branch master
-    branch: master
+    branch: main
   # Here i tell trevis to pick the environmental credential from Travis itself
   access_key_id: "$AWS_ACCESS_KEY"
   secret_access_key: "$AWS_SECRET_KEY"
