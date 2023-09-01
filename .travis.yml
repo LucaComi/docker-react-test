@@ -11,3 +11,18 @@ script:
   # It is supposed to contain all the commands that will be exceted to run our test suite
   # -e CI=true to run the test and exit it as soon as the suite of tests is done
   - docker run -e CI=true docker-react-test npm run test 
+
+deploy:
+  #Travis is setup in a way that it has multiple possible providers i can chose from 
+  provider: elasticbeabstalk # The product
+  region:  eu-north-1 # the environment that you can see in the url
+  app: docker-react-test # the app name
+  env: Docker-react-test-env # The environment name
+  bucket_name: elasticbeanstalk-eu-north-1-290440519560 # The backet where my application will be copied in
+  bucket_path: docker-react-test # teh same of the app name
+  on: 
+    # We deploy the app ony if we are on the branch master
+    branch: master
+  # Here i tell trevis to pick the environmental credential from Travis itself
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
